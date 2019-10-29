@@ -65,6 +65,20 @@
                     </td>
                   <td>
                     <a href="{{route('admin.projects.edit',['id'=>$value->id])}}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{{route('admin.projects.detail',['id'=>encrypt($value->id,'vipra')])}}" class="btn btn-sm btn-success">View</a>
+                   
+                     <a href="{{ route('admin.projects.delete',['id'=>encrypt($value->id,'vipra')]) }}" class="text-danger pull-right"
+                           data-tr="tr_{{$value->id}}"
+                           data-toggle="confirmation"
+                           data-btn-ok-label="Delete" data-btn-ok-icon="fa fa-remove"
+                           data-btn-ok-class="btn btn-sm btn-danger"
+                           data-btn-cancel-label="Cancel"
+                           data-btn-cancel-icon="fa fa-chevron-circle-left"
+                           data-btn-cancel-class="btn btn-sm btn-default"
+                           data-title="Are you sure you want to delete ?"
+                           data-placement="left" data-singleton="true">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </a>
                   </td>
                    </tr>
                   @endforeach
@@ -113,5 +127,44 @@
       'autoWidth'   : true
     })
   })
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mistic100-Bootstrap-Confirmation/2.4.4/bootstrap-confirmation.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]',
+            onConfirm: function (event, element) {
+                element.trigger('confirm');
+            }
+        });
+
+
+        $(document).on('confirm', function (e) {
+            var ele = e.target;
+            e.preventDefault();
+
+
+            $.ajax({
+                url: ele.href,
+                type: 'GET',
+                success: function (data) {
+                    if (data['success']) {
+                        $("#" + data['tr']).slideUp("slow");
+                        alert(data['success']);
+                    } else if (data['error']) {
+                        alert(data['error']);
+                    } else {
+                        alert('Whoops Something went wrong!!');
+                    }
+                },
+                error: function (data) {
+                    alert(data.responseText);
+                }
+            });
+
+
+            return false;
+        });
+    });
 </script>
 @endsection

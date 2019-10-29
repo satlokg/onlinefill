@@ -176,4 +176,22 @@ public function addUser(Request $r)
         return back()->with($notification);
     }
 
+    public function projectDetail($key)
+    {
+        $id=decrypt($key,'vipra');
+        $project=Project::find($id); 
+        return view('admin.project.detail',compact('project'));
+    }
+
+    public function delete($key)
+    {
+        $id=decrypt($key,'vipra');
+        $project=Project::find($id)->delete(); 
+        $notification = array(
+                        'message' => 'Project Deleted', 
+                        'alert-type' => 'success'
+                    );
+        return back()->with($notification);
+    }
+
 }
