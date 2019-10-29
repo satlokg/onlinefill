@@ -46,4 +46,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Project','project_hour')
         ->withPivot('alloted_hours','spend_hours')->withTimestamps();
     }
+    public function task(){
+        return $this->hasOne('App\Models\Task');
+    }
 }

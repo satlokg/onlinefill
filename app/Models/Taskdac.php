@@ -9,4 +9,9 @@ class Taskdac extends Model
     protected $fillable=[
     	'task_id','filename'
     ];
+
+    public function task(){
+
+    	return $this->belongsTo(Task::class);
+    }
 }

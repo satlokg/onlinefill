@@ -217,7 +217,14 @@
                             <input type="hidden" name="hours[{{$key}}][user_id]" value="{{$user->id}}">
                                   Hours
                               <input type="text" value="{{$user->pivot->alloted_hours}}" name="hours[{{$key}}][alloted_hours]" style="width: 50px; border: 1px solid green" {{!in_array($user->id, $selected)?'disabled':''}}>
-                            
+                            spend hours 
+                             @if($project->spendhour($user->id) <= $project->projecthour($user->id)->alloted_hours)
+                              <span class="label label-success">
+                              @else
+                               <span class="label label-danger">
+                              @endif
+                              {{$project->spendhour($user->id)}} hours
+                              </span>
                              <a href="{{ route('admin.project.delete.user',['id'=>$user->id,'pid'=>$project->id]) }}" class="text-danger pull-right"
                            data-tr="tr_{{$user->id}}"
                            data-toggle="confirmation"

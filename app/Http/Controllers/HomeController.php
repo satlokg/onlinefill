@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use App\User;
+use App\Models\Project;
+use App\Models\Task;
+use App\Models\Taskdac;
+use App\Models\File;
 use Auth;
 
 
@@ -30,8 +34,52 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $projects=Auth::user()->projects; //dd($projects);
+        $projects=Auth::user()->projecthours; //dd($projects);
         return view('home',compact('projects'));
+    }
+    public function projectDetail($key)
+    {
+        $id=decrypt($key,'vipra');
+        $project=Project::find($id); 
+        return view('user.project.detail',compact('project'));
+    }
+    public function projectComment(Request $r)
+    {
+        $this->validate($r, [
+                'filenames.*' => 'mimes:doc,pdf,docx,zip,png,jpg,xlsx,xls'
+        ]);
+        $t=$r->task;
+        $t['user_id']=Auth::user()->id;
+        $task=Task::create($t);
+        if($r->hasfile('filenames'))
+         {
+            foreach($r->file('filenames') as $file)
+            {
+                // $name=$file->getClientOriginalName();
+                // $file->move(public_path().'/files/', $name);
+              $destinationPath = public_path('files'); 
+              $filepath =$destinationPath.'/'. File::sanitize($file->getClientOriginalName());
+              $fileinfo = pathinfo(File::generateFilename($filepath));
+              $imageName= $fileinfo['basename'];
+              $file->move($destinationPath,$imageName);
+                $f= new Taskdac();
+                 $f->filename=$imageName;
+                 $f->task_id=$task->id;
+                 $f->save(); 
+            }
+         }
+         if($task){
+            $notification = array(
+                        'message' => 'Comment Aded', 
+                        'alert-type' => 'success'
+                    );
+        }else{
+            $notification = array(
+                        'message' => 'Comment not Aded', 
+                        'alert-type' => 'danger'
+                    );
+        }
+         return back()->with($notification);
     }
 
     public function notify(){

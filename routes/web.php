@@ -37,6 +37,8 @@ Route::get('markasunread', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/project-detail/{key}', 'HomeController@projectDetail')->name('user.projects.detail');
+Route::post('/project-comment', 'HomeController@projectComment')->name('user.projects.comment');
 Route::get('/notify', 'HomeController@notify')->name('notify');
 
 Route::prefix('admin')->group(function() {

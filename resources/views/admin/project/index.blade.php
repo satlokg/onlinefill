@@ -40,6 +40,8 @@
                   <th>Technology</th>
                   <th>Delivery Date</th>
                   <th>Project Manager</th>
+                  <th>Estimeted Hours</th>
+                  <th>Spend Hours</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -52,6 +54,15 @@
                   <td>{{$value->technology}}</td>
                   <td>{{$value->delivery_date}}</td>
                   <td>{{$value->projectManager($value->project_manager)}}</td>
+                  <td>{{$value->est_hours}}</td>
+                  <td> @if($value->totalspendhour() <= $value->est_hours)
+                    <span class="label label-success">
+                    @else
+                     <span class="label label-danger">
+                    @endif
+                    {{$value->totalspendhour()}} hours
+                    </span>
+                    </td>
                   <td>
                     <a href="{{route('admin.projects.edit',['id'=>$value->id])}}" class="btn btn-sm btn-warning">Edit</a>
                   </td>

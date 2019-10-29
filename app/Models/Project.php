@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Auth;
 
 class Project extends Model
 {
@@ -25,5 +26,32 @@ class Project extends Model
     public function userhours(){
         return $this->belongsToMany('App\User','project_hour')
         ->withPivot('alloted_hours','spend_hours')->withTimestamps();
+    }
+
+
+    public function tasks(){
+        return $this->hasMany(Task::class);
+    }
+
+    public function projecthour($uid=null){
+        if($uid==null){
+            $uid=Auth::user()->id;
+        }
+        $pid=$this->id; 
+        $hour=ProjectHour::where('project_id',$pid)->where('user_id',$uid)->first();
+        return $hour;
+    }
+    public function spendhour($uid=null){
+        if($uid==null){
+            $uid=Auth::user()->id;
+        }
+        $pid=$this->id; 
+        $hour=Task::where('project_id',$pid)->where('user_id',$uid)->sum('hours');
+        return $hour;
+    }
+    public function totalspendhour(){
+        $pid=$this->id; 
+        $hour=Task::where('project_id',$pid)->sum('hours');
+        return $hour;
     }
 }
