@@ -1,23 +1,112 @@
-@extends('layouts.app')
+@extends('layouts.user')
+@section('css')
+
+ @endsection
+ @section('bread')
+ <section class="content-header">
+      <h1>
+        Project
+      
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li class="active">Project</li>
+      </ol>
+@endsection
+
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Project Detail</h3>
             </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                
+                <!-- /.col -->
+               <div class="col-md-12">
+                <!-- /.col -->
+               <table id="emp" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Sr. No.</th>
+                  <th>Project Name</th>
+                  <th>Technology</th>
+                  <th>Delivery Date</th>
+                  <th>Start And End Date</th>
+                  <th>Project Manager</th>
+                  <th>Estimeted Hours</th>
+                  <th>Total Spend Hours</th>
+                  <th>Assigned At</th>
+                  <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                  @foreach($projects as $key=>$value)
+                  <tr>
+                  <td>{{$key+1}}</td>
+                  <td>{{$value->project_name}}</td>
+                  <td>{{$value->technology}}</td>
+                  <td>{{$value->delivery_date}}</td>
+                  <td>{{$value->start_end}}</td>
+                  <td>{{$value->projectManager($value->project_manager)}}</td>
+                  <td><span class="label label-success">{{$value->pivot->alloted_hours}}</span></td>
+                  <td></td>
+                  <td>{{$value->pivot->created_at}}</td>
+                  <td>
+                    <a href="{{route('admin.projects.edit',['id'=>$value->id])}}" class="btn btn-sm btn-warning">View</a>
+                  </td>
+                   </tr>
+                  @endforeach
+               
+                </tbody>
+                
+              </table>
+            </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- ./box-body -->
+            <div class="box-footer">
+              
+              <!-- /.row -->
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
         </div>
-    </div>
-</div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+   
+      <!-- /.row -->
+      @endsection
+
+@section('js')
+<script>
+(function($) {
+    $(function() {
+        window.fs_test = $('.test').fSelect();
+    });
+})(jQuery);
+</script>
+<script>
+  $(function () {
+    $('#emp').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : true
+    })
+  })
+</script>
 @endsection

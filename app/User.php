@@ -38,6 +38,12 @@ class User extends Authenticatable
     ];
 
     public function projects(){
-        return $this->belongsToMany('App\Models\Project','project_user');
+        return $this->belongsToMany('App\Models\Project','project_user')
+        ->withPivot('alloted_hours')->withTimestamps();
+    }
+
+    public function projecthours(){
+        return $this->belongsToMany('App\Models\Project','project_hour')
+        ->withPivot('alloted_hours','spend_hours')->withTimestamps();
     }
 }

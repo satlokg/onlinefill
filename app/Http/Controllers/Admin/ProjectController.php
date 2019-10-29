@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\File;
 use App\User;
-
+use App\Models\ProjectHour;
 class ProjectController extends Controller
 {
    public function __construct()
@@ -53,6 +53,7 @@ class ProjectController extends Controller
             $project->start_end =$r->start_end;
             $project->est_hours =$r->est_hours;
             $project->save();
+           
         }else{
         $project= Project::create([
             'project_name' => $r->project_name,
@@ -64,8 +65,10 @@ class ProjectController extends Controller
             'start_end' =>$r->start_end,
             'est_hours' =>$r->est_hours,
         ]);
+         $project->users()->sync($r->assign_user);
+         $project->userhours()->sync($r->assign_user);
         }
-        $project->users()->sync($r->assign_user);
+
          if($r->hasfile('filenames'))
          {
             foreach($r->file('filenames') as $file)
@@ -84,9 +87,17 @@ class ProjectController extends Controller
             }
          }
          $sum=0;
-          if(is_array($r->hours)){
+          if(is_array($r->hours)){ 
             foreach ($r->hours as $key => $value) {
-                $sum=$sum+$value['alloted_hours'];
+                if(isset($value['alloted_hours'])){
+                    $sum=$sum+$value['alloted_hours'];
+                }else{
+                    $ph=ProjectHour::where('user_id',$value['user_id'])
+                    ->where('project_id',$project->id)
+                    ->first();
+                    $sum=$sum+$ph->alloted_hours;
+                }
+                
             }
             if($sum > $project->est_hours){
                 $notification = array(
@@ -96,7 +107,9 @@ class ProjectController extends Controller
                 return back()->with($notification);
             }
             foreach ($r->hours as $key => $value) {
-                $project->users()->updateExistingPivot($value['user_id'], array('alloted_hours' => $value['alloted_hours']), false);
+                if(isset($value['alloted_hours'])){
+                $project->userhours()->updateExistingPivot($value['user_id'], array('alloted_hours' => $value['alloted_hours']), false);
+            }
             }
          }
          
@@ -137,6 +150,29 @@ class ProjectController extends Controller
                         'alert-type' => 'success'
                     );
         }
+        return back()->with($notification);
+    }
+
+public function addUser(Request $r)
+    {
+       $project=Project::find($r->project_id);
+       $project->users()->attach($r->assign_user);
+       foreach ($r->assign_user as $key => $value) {
+        $ph=ProjectHour::where('user_id',$value)
+                    ->where('project_id',$r->project_id)
+                    ->first();
+        if($ph==null){
+            ProjectHour::create([
+            'user_id'=>$value,
+            'project_id'=>$r->project_id
+          ]);
+        }
+          
+       }
+         $notification = array(
+                        'message' => 'User Added', 
+                        'alert-type' => 'success'
+                    );
         return back()->with($notification);
     }
 

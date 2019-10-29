@@ -114,17 +114,14 @@
               </div>
               <div class="col-md-6">
                   <!-- general form elements -->
-                <div class="box box-primary">
+               <!--  <div class="box box-primary">
                   <div class="box-header with-border">
-                    <h3 class="box-title">Assign User</h3>
+                    <h3 class="box-title">Active User</h3>
                   </div>
-                  <!-- /.box-header -->
-                  <!-- form start -->
+               
                     <div class="box-body">
                      
-                    <!-- /.box-body -->
                      <div class="form-group">
-                        <label>Select user to Assign Project</label>
                          @php
                          $project->users ? $selected=$project->users->pluck('id')->toArray() : $selected=[];
                          @endphp
@@ -136,8 +133,7 @@
                       </div>
                    
                      </div>
-                    <!-- /.box -->
-                </div>
+                </div> -->
 
 
                 <div class="box box-primary">
@@ -207,6 +203,7 @@
                 <div class="box box-primary">
                   <div class="box-header with-border">
                     <h3 class="box-title">Assign User</h3>
+                    <a href="#" class="btn btn-sm btn-info pull-right"  data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus" aria-hidden="true"></i></a>
                   </div>
                   <!-- /.box-header -->
                   <!-- form start -->
@@ -214,12 +211,12 @@
                     <div class="row"><br>
                       <div class="col-md-12 mt-10">
                           <ul class="list-group-item d-flex justify-content-between align-items-center">
-                              @foreach($project->users as $key=>$user)
-                            <li class="list-group-item"><i class="fa fa-user-circle-o" aria-hidden="true"></i><a target="_blank" href="#"> {{$user->name}} ({{$user->designation}})</a>
+                              @foreach($project->userhours as $key=>$user)
+                            <li class="list-group-item{{!in_array($user->id, $selected)?' bg-gray':''}}"><i class="fa fa-user-circle-o" aria-hidden="true"></i><a target="_blank" href="#"> {{$user->name}} ({{$user->designation}})</a>
                             &nbsp;&nbsp;&nbsp;
                             <input type="hidden" name="hours[{{$key}}][user_id]" value="{{$user->id}}">
                                   Hours
-                              <input type="text" value="{{$user->pivot->alloted_hours}}" name="hours[{{$key}}][alloted_hours]" style="width: 50px; border: 1px solid green">
+                              <input type="text" value="{{$user->pivot->alloted_hours}}" name="hours[{{$key}}][alloted_hours]" style="width: 50px; border: 1px solid green" {{!in_array($user->id, $selected)?'disabled':''}}>
                             
                              <a href="{{ route('admin.project.delete.user',['id'=>$user->id,'pid'=>$project->id]) }}" class="text-danger pull-right"
                            data-tr="tr_{{$user->id}}"
@@ -259,7 +256,40 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <form method="POST" action="{{ route('admin.add.user') }}">
+      <div class="modal-body">
+       
+          @csrf
+          <input type="hidden" name="project_id" value="{{$project->id}}">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Users:</label>
+             <select class="form-control test" multiple="multiple" data-placeholder="Select User" style="width: 100%;" name="assign_user[]">
+                          @foreach($users as $user)
+                          @if(in_array($user->id, $selected))
+                          @continue;
+                          @endif
+                          <option value="{{$user->id}}">{{$user->name}} ({{$user->designation}})</option>
+                          @endforeach
+                        </select>
+          </div>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
    
       <!-- /.row -->
       @endsection

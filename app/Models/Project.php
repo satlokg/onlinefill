@@ -22,4 +22,8 @@ class Project extends Model
         return $this->belongsToMany('App\User','project_user')
         ->withPivot('alloted_hours');
     }
+    public function userhours(){
+        return $this->belongsToMany('App\User','project_hour')
+        ->withPivot('alloted_hours','spend_hours')->withTimestamps();
+    }
 }

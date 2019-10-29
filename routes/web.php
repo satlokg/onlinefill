@@ -57,6 +57,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/projects/edit/{id}', 'Admin\ProjectController@edit')->name('admin.projects.edit');
     Route::get('/projects/delete/user/{id}/{pid}', 'Admin\ProjectController@deleteUser')->name('admin.project.delete.user');
     Route::get('/projects/delete/file/{id}', 'Admin\ProjectController@deleteFile')->name('admin.project.delete.file');
+    Route::post('/add/user', 'Admin\ProjectController@addUser')->name('admin.add.user');
     //report
     Route::get('/report/list', 'Admin\ReportController@index')->name('admin.report');
     

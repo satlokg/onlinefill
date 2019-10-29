@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use App\User;
+use Auth;
 
 
 class HomeController extends Controller
@@ -29,7 +30,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $projects=Auth::user()->projects; //dd($projects);
+        return view('home',compact('projects'));
     }
 
     public function notify(){
