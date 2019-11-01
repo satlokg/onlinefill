@@ -90,7 +90,11 @@
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
                 @foreach($project->tasks as $task)
-                 <div class="box box-info box-solid">
+                @if($project->project_manager==$task->user_id)
+                 <div class="box box-warning box-solid">
+                @else
+                  <div class="box box-info box-solid">
+                @endif 
                     <div class="box-header with-border">
                       <h3 class="box-title">{{$task->user->name}}</h3>
 
