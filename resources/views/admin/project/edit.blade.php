@@ -113,6 +113,9 @@
                 <!-- /.col -->
               </div>
               <div class="col-md-6">
+                 @php
+                         $project->users ? $selected=$project->users->pluck('id')->toArray() : $selected=[];
+                         @endphp
                   <!-- general form elements -->
                <!--  <div class="box box-primary">
                   <div class="box-header with-border">

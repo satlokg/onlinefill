@@ -28,6 +28,12 @@
             <i class="fa fa-user"></i> <span>Projects</span>
           </a>
         </li>
+
+         <li>
+          <a href="{{route('user.project.lead')}}">
+            <i class="fa fa-user"></i> <span>Lead Projects</span>
+          </a>
+        </li>
         
        
        

@@ -55,21 +55,21 @@
                   <td>{{$value->delivery_date}}</td>
                   <td>{{$value->start_end}}</td>
                   <td>{{$value->projectManager($value->project_manager)}}</td>
-                  <td><span class="label label-success">{{$value->pivot->alloted_hours}} hours</span></td>
+                  <td><span class="label label-success">{{$value->est_hours}} hours</span></td>
                  
                     <td>
-                     @if($value->spendhour() <= $value->projecthour()->alloted_hours)
+                     @if($value->totalspendhour() <= $value->est_hours)
                     <span class="label label-success">
                     @else
                      <span class="label label-danger">
                     @endif
-                    {{$value->spendhour()}} hours
+                    {{$value->totalspendhour()}} hours
                     </span>
                     </td>
                  
-                  <td>{{$value->pivot->created_at}}</td>
+                  <td>{{$value->created_at}}</td>
                   <td>
-                    <a href="{{route('user.projects.detail',['id'=>encrypt($value->id,'vipra')])}}" class="btn btn-sm btn-warning">View</a>
+                    <a href="{{route('user.projects.leaddetail',['id'=>encrypt($value->id,'vipra')])}}" class="btn btn-sm btn-warning">View</a>
                   </td>
                    </tr>
                   @endforeach
