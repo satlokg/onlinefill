@@ -14,6 +14,8 @@ class AdminLoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     use AuthenticatesUsers;
+    protected $redirectTo = '/admin/dashboard';
     public function showLoginForm()
     {
         return view('auth.admin-login');
@@ -22,13 +24,13 @@ class AdminLoginController extends Controller
         return Auth::guard('admin');
     }
     
-    use AuthenticatesUsers;
+
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/admin/dashboard';
+    
     /**
      * Create a new controller instance.
      *
