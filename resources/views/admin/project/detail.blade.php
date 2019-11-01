@@ -132,7 +132,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                      {{$project->description}}
+                      {!!$project->description!!}
                      
                     </div>
                   
