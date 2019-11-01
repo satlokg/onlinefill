@@ -43,18 +43,25 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-import Echo from 'laravel-echo'
+// import Echo from 'laravel-echo'
 
-window.Pusher = require('pusher-js');
+// window.Pusher = require('pusher-js');
+
+// window.Echo = new Echo({
+// 	authEndpoint : 'http://localhost/mbBiocoal/public/broadcasting/auth',
+//     broadcaster: 'pusher',
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     encrypted: true
+// });
+import Echo from "laravel-echo"
 
 window.Echo = new Echo({
-	authEndpoint : 'http://localhost/mbBiocoal/public/broadcasting/auth',
     broadcaster: 'pusher',
-    key: process.env.MIX_PUSHER_APP_KEY,
-    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    key: '114ce95ff13a1b5fcd18',
+    cluster: 'eu',
     encrypted: true
 });
-
 
 // var channel = Echo.channel('my-channel');
 // channel.listen('my-event', function(data) {

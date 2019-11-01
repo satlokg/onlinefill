@@ -49,4 +49,9 @@ class User extends Authenticatable
     public function task(){
         return $this->hasOne('App\Models\Task');
     }
+
+    public function messages()
+        {
+          return $this->hasMany(Message::class);
+        }
 }

@@ -17,9 +17,9 @@ use App\User;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 
@@ -35,6 +35,12 @@ Route::get('markasunread', function () {
 
 
 Auth::routes();
+
+//chat
+Route::get('/', 'ChatsController@index');
+Route::get('messages', 'ChatsController@fetchMessages');
+Route::post('messages', 'ChatsController@sendMessage');
+//chat
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/project-detail/{key}', 'HomeController@projectDetail')->name('user.projects.detail');

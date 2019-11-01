@@ -84,6 +84,7 @@
             <ul class="nav nav-tabs">
               <li class="active"><a href="#tab_1" data-toggle="tab">All Commrnt</a></li>
               <li><a href="#tab_2" data-toggle="tab">Project Description</a></li>
+              <li><a href="#tab_3" data-toggle="tab">Project Documents</a></li>
               
               <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
             </ul>
@@ -137,6 +138,28 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                      {!!$project->description!!}
+                     
+                    </div>
+                  
+                  </div>
+                 
+              </div>
+
+              <div class="tab-pane" id="tab_3">
+               
+                 <div class="box box-info box-solid">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Documents</h3>
+                      <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                    <ul class="list-group-item d-flex justify-content-between align-items-center">
+                             @foreach($project->files as $file)
+                            <li class="list-group-item"><i class="fa fa-file-image-o" aria-hidden="true">  </i><a target="_blank" href="{{url('/public/files/')}}/{{$file->filename}}">  {{$file->filename}}</a>
+                            </li>
+                            @endforeach
+                          </ul>
                      
                     </div>
                   
