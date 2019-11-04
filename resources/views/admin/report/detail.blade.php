@@ -21,7 +21,7 @@
         <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Report Detail</h3>
+              <h3 class="box-title">Report Detail ({{$user_name}})</h3>
               @include('admin.project.timeline')
               
             </div>

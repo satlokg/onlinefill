@@ -37,11 +37,12 @@ class ReportController extends Controller
     public function detail($date,$key)
     {
         $user_id=decrypt($key,'vipra');
+        $user_name=User::where('id',$user_id)->first()->name;
        $tasks = Task::orderBy('created_at')
        ->whereDate('created_at',$date)
        ->where('user_id',$user_id)
        ->get();
        //dd($tasks);
-        return view('user.report.detail',compact('tasks'));
+        return view('user.report.detail',compact('tasks','user_name'));
     }
 }
