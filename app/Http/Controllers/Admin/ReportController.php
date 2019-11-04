@@ -44,6 +44,6 @@ class ReportController extends Controller
        ->where('user_id',$user_id)
        ->get();
        //dd($tasks);
-        return view('admin.report.detail',compact('tasks','user_name'));
+        return view('admin.report.detail',compact('tasks','user_name','user_id'));
     }
 }
