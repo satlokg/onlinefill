@@ -39,7 +39,7 @@ class ReportController extends Controller
     {
         $user_id=decrypt($key,'vipra');
         $user=User::where('id',$user_id)->first();
-        $user_name=$user->name
+        $user_name=$user->name;
        $tasks = Task::orderBy('created_at')
        ->whereDate('created_at',$date)
        ->where('user_id',$user_id)
