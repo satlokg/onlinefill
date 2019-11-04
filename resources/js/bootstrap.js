@@ -55,7 +55,7 @@ if (token) {
 //     encrypted: true
 // });
 import Echo from "laravel-echo"
-
+import Pusher from "pusher-js"
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '114ce95ff13a1b5fcd18',

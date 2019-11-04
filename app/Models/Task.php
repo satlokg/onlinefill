@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
+use Auth;
 class Task extends Model
 {
     protected $fillable=[
@@ -19,5 +20,23 @@ class Task extends Model
     public function project(){
 
     	return $this->belongsTo(Project::class);
+    }
+
+    static function task($d){
+
+        $task = Task::orderBy('created_at')
+       ->whereDate('created_at', $d)
+       ->get();
+       return $task;
+
+
+       // $task = Task::orderBy('created_at')
+       // ->whereDate('created_at', Carbon::now()->year)
+       // ->whereMonth('created_at', Carbon::now()->month)
+       // ->get()->groupBy(function($item) {
+       //      return $item->created_at->format('Y-m-d');
+
+       //  });
+       // return $task;
     }
 }

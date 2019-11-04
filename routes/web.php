@@ -45,10 +45,16 @@ Route::post('messages', 'ChatsController@sendMessage');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/project-detail/{key}', 'HomeController@projectDetail')->name('user.projects.detail');
 Route::post('/project-comment', 'HomeController@projectComment')->name('user.projects.comment');
+
 //user-project
 Route::get('/project-lead', 'user\ProjectController@projectLead')->name('user.project.lead');
 Route::get('/project-lead-detail/{key}', 'user\ProjectController@projectLeadDetail')->name('user.projects.leaddetail');
 Route::post('/project-lead-hours', 'user\ProjectController@addHours')->name('user.projects.addHours');
+//report
+Route::get('/report', 'user\ReportController@index')->name('user.report');
+Route::get('/report/detail/{date}', 'user\ReportController@detail')->name('user.report.detail');
+
+
 Route::get('/notify', 'HomeController@notify')->name('notify');
 
 Route::prefix('admin')->group(function() {
@@ -75,7 +81,8 @@ Route::prefix('admin')->group(function() {
     Route::get('/project-delete/{key}', 'Admin\ProjectController@delete')->name('admin.projects.delete');
     //report
     Route::get('/report/list', 'Admin\ReportController@index')->name('admin.report');
-    
+    Route::get('/report/user/{key}', 'Admin\ReportController@report')->name('admin.user.report');
+    Route::get('/report/detail/{date}/{key}', 'Admin\ReportController@detail')->name('admin.user.report.detail');
 });
 
 Route::prefix('vendor')->group(function() {

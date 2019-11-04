@@ -56,6 +56,8 @@
                   <td>{{$value->designation}}</td>
                   <td>
                     <a href="{{route('admin.employee.edit',['id'=>$value->id])}}" class="btn btn-sm btn-warning">Edit</a>
+
+                    <a href="{{route('admin.user.report',['id'=>encrypt($value->id,'vipra')])}}" class="btn btn-sm btn-success"> Report</a>
                   </td>
                    </tr>
                   @endforeach

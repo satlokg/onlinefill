@@ -35,7 +35,11 @@
           </a>
         </li>
         
-       
+       <li>
+          <a href="{{route('user.report')}}">
+            <i class="fa fa-user"></i> <span>Reports</span>
+          </a>
+        </li>
        
        
         
