@@ -27,24 +27,24 @@ class ReportController extends Controller
     public function report($key)
     {
         $user_id=decrypt($key,'vipra');
+        $user_name=User::where('id',$user_id)->first()->name;
         $tasks = Task::orderBy('created_at')
        ->where('user_id',$user_id)
        ->get()->groupBy(function($item) {
             return $item->created_at->format('Y-m-d');
         });
-        return view('admin.report.detail',compact('tasks','user_id'));
+        return view('admin.report.detail',compact('tasks','user_id','user_name'));
     }
 
     public function detail($date,$key)
     {
         $user_id=decrypt($key,'vipra');
-        $user=User::where('id',$user_id)->first();
-        $user_name=$user->name;
+        $user_name=User::where('id',$user_id)->first()->name;
        $tasks = Task::orderBy('created_at')
        ->whereDate('created_at',$date)
        ->where('user_id',$user_id)
        ->get();
        //dd($tasks);
-        return view('admin.report.detail',compact('tasks','user_name','user_id'));
+        return view('admin.report.report_detail',compact('tasks','user_name','user_id'));
     }
 }
