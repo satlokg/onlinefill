@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Task;
 
 class User extends Authenticatable
 {
@@ -49,7 +50,17 @@ class User extends Authenticatable
     public function task(){
         return $this->hasOne('App\Models\Task');
     }
-
+    public function tasks(){
+        return $this->hasMany('App\Models\Task');
+    }
+    public function todaySpend($pid,$uid,$date){
+        $task = Task::where('project_id',$pid)->where('user_id',$uid);
+        if($date!=null){
+            $task->whereDate('created_at',$date);
+        }
+        $task->get();
+        return $task;
+    }
     public function messages()
         {
           return $this->hasMany(Message::class);

@@ -83,6 +83,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/report/list', 'Admin\ReportController@index')->name('admin.report');
     Route::get('/report/user/{key}', 'Admin\ReportController@report')->name('admin.user.report');
     Route::get('/report/detail/{date}/{key}', 'Admin\ReportController@detail')->name('admin.user.report.detail');
+    Route::get('/report/todayReport', 'Admin\ReportController@todayReport')->name('admin.report.todayReport');
 });
 
 Route::prefix('vendor')->group(function() {

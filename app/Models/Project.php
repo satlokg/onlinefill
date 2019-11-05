@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use Auth;
-
+use App\Models\Task;
 class Project extends Model
 {
     protected $fillable=[
@@ -53,5 +53,13 @@ class Project extends Model
         $pid=$this->id; 
         $hour=Task::where('project_id',$pid)->sum('hours');
         return $hour;
+    }
+    public function todaySpend($pid,$date){ 
+         $task = Task::where('project_id',$pid);
+        if($date!=null){
+            $task->whereDate('created_at',$date);
+        }
+        $t = $task->get();
+        return $t;
     }
 }

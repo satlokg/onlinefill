@@ -36,7 +36,7 @@
         </li>
 
         <li>
-          <a href="{{route('admin.report')}}">
+          <a href="{{route('admin.report.todayReport')}}">
             <i class="fa fa-eye"></i> <span>Reports</span>
           </a>
         </li>

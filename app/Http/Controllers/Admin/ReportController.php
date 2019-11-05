@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Task;
 use App\User;
+use App\Models\Project;
 
 class ReportController extends Controller
 {
@@ -46,5 +47,16 @@ class ReportController extends Controller
        ->get();
        //dd($tasks);
         return view('admin.report.report_detail',compact('tasks','user_name','user_id'));
+    }
+
+    public function todayReport(Request $r){ 
+        $users= User::all();
+        $projects= Project::all();
+        if($r->date){
+            $date=$r->date;
+        }else{
+            $date=null;
+        }
+        return view('admin.report.today_report',compact('users','projects','date'));
     }
 }
