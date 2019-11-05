@@ -66,15 +66,20 @@ class ReportController extends Controller
         $data=[];
         $users=User::all();
         $projects= Project::all();
-        
+        $projects= Project::all();
+        if($date){
+            $date=$date;
+        }else{
+            $date=null;
+        }
 
         //dd($data);
         foreach($projects as $project){
-          
+           $data[$project->project_name][]['Project/User']=$project->project_name;
                 foreach($users as $user){
                 if($project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours')) > 0){
-                     $data[$project->project_name]['Project/User'][]=$project->project_name;
-                     $data[$project->project_name][$user->name][]=$project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours'));
+                    
+                     $data[$project->project_name][][$user->name]=$project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours'));
                          
                     }
 
@@ -89,12 +94,7 @@ class ReportController extends Controller
        
                    
         //$data= User::all()->toArray(); 
-        $projects= Project::all();
-        if($date){
-            $date=$date;
-        }else{
-            $date=null;
-        }
+        
 
         return Excel::create('excel_data', function($excel) use ($data) {
             $excel->sheet('mySheet', function($sheet) use ($data)
