@@ -91,7 +91,7 @@ class ReportController extends Controller
                 }
                 
             if($project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours')) > 0){
-                       $data['Project/User'e]['Total']=$project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours'));
+                       $data['Project/User']['Total']=$project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours'));
                      }else{
                         $data['Project/User']['Total']=' ';
                      }  
