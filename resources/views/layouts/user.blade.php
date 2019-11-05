@@ -135,7 +135,7 @@
       
       $('input[id$="time"]').inputmask(
         "hh:mm", {
-        placeholder: "HH:MM", 
+        placeholder: "00:00", 
         insertMode: false, 
         showMaskOnHover: false,
         hourFormat: 12
