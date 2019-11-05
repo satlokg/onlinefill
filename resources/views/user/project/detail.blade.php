@@ -192,7 +192,7 @@
                                 style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; color: #000"></textarea>
                         <div class="form-group">
                           <label for="exampleInputEmail1">Enter Spend Hours</label>
-                          <input type="text" name="task[hours]" class="form-control" id="exampleInputEmail1" placeholder="Enter Spend Hours">
+                          <input type="text" name="task[hours]" class="form-control" id="time" placeholder="Enter Spend Hours">
                         </div>  
                         <div class="form-group">
                           <label for="exampleInputEmail1">Upload Document</label>

@@ -66,12 +66,13 @@
         // page is now ready, initialize the calendar...
         $('#calendar').fullCalendar({
             // put your options and callbacks here
-            events : [
+           
+             events : [
                 @foreach($tasks as $date=>$task)
                 {
-                    title : '{{ $task->sum('hours') }} Hours',
+                    title : '{{ $task[0]->AddPlayTime($task->pluck('hours')) }} Hours',
                     start : '{{ $date }}',
-                    url : '{{ route('admin.user.report.detail',["date"=>$date,"key"=>encrypt($user_id,'vipra')]) }}'
+                    url : '{{ route('user.report.detail',["date"=>$date]) }}'
                 },
                 @endforeach
             ]

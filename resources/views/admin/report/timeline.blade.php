@@ -12,5 +12,7 @@
 	</div>
 	</form>
 </div>	
-	<a href="" class="btn btn-sm btn-info pull-right"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Excel</a>
+	<a href="" class="btn btn-sm btn-info pull-right" style="margin-left: 10px;"><i class="fa fa-file-excel-o  text-success" aria-hidden="true"></i> Export Excel</a>  &nbsp;
+	<a href="" class="btn btn-sm btn-info pull-right" style="margin-left: 10px;"><i class="fa fa-file-pdf-o  text-success" aria-hidden="true"></i> Export CSV</a>
+	<a href="" class="btn btn-sm btn-info pull-right" style="margin-left: 10px;"><i class="fa fa-file-pdf-o  text-success" aria-hidden="true"></i> Export PDF</a>
 </div>

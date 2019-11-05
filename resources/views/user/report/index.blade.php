@@ -64,7 +64,7 @@ use App\Models\Task;
             events : [
                 @foreach($tasks as $date=>$task)
                 {
-                    title : '{{ $task->sum('hours') }} Hours',
+                    title : '{{ $task[0]->AddPlayTime($task->pluck('hours')) }} Hours',
                     start : '{{ $date }}',
                     url : '{{ route('user.report.detail',["date"=>$date]) }}'
                 },

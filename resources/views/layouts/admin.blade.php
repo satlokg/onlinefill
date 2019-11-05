@@ -126,6 +126,21 @@
     });
   });
 </script>
+ <script>
+    $(function(){
+      
+      $('input[id$="time"]').inputmask(
+        "hh:mm", {
+        placeholder: "HH:MM", 
+        insertMode: false, 
+        showMaskOnHover: false,
+        hourFormat: 12
+      }
+      );
+      
+      
+    });
+  </script>
 @yield('js')
 </body>
 </html>

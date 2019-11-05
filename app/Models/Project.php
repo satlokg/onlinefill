@@ -46,13 +46,15 @@ class Project extends Model
             $uid=Auth::user()->id;
         }
         $pid=$this->id; 
-        $hour=Task::where('project_id',$pid)->where('user_id',$uid)->sum('hours');
-        return $hour;
+        $hours=Task::where('project_id',$pid)->where('user_id',$uid)->pluck('hours');
+        $t=new Task();
+        return $t->AddPlayTime($hours);
     }
     public function totalspendhour(){
         $pid=$this->id; 
-        $hour=Task::where('project_id',$pid)->sum('hours');
-        return $hour;
+        $hours=Task::where('project_id',$pid)->pluck('hours');
+        $t=new Task();
+        return $t->AddPlayTime($hours);
     }
     public function todaySpend($pid,$date){ 
          $task = Task::where('project_id',$pid);
@@ -62,4 +64,21 @@ class Project extends Model
         $t = $task->get();
         return $t;
     }
+    public function AddPlayTime($times) { 
+    $minutes = 0; //declare minutes either it gives Notice: Undefined variable
+    // loop throught all the times
+    foreach ($times as $time) {
+      if($time != null){
+        list($hour, $minute) = explode(':', $time);
+        $minutes += $hour * 60;
+        $minutes += $minute;
+      }
+    }
+
+    $hours = floor($minutes / 60);
+    $minutes -= $hours * 60;
+
+    // returns the time already formatted
+    return sprintf('%02d:%02d', $hours, $minutes);
+}
 }
