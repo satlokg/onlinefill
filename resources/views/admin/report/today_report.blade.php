@@ -53,20 +53,22 @@
                        @foreach($users as $user)
                        @if($user->todaySpend($project->id,$user->id,$date)->sum('hours') > 0)
                           <td class="bg-green">
+                            {{$user->todaySpend($project->id,$user->id,$date)->sum('hours')}} Hours
                        @else
                          <td class="bg-grey">
 
                        @endif
-                           {{$user->todaySpend($project->id,$user->id,$date)->sum('hours')}} Hours
+                           
                          </td>
                          
                       @endforeach
                       @if($project->todaySpend($project->id,$date)->sum('hours') > 0)
                           <td class="bg-orange">
+                             {{$project->todaySpend($project->id,$date)->sum('hours')}} Hours</td>
                        @else
                          <td class="bg-grey">
                        @endif
-                          {{$project->todaySpend($project->id,$date)->sum('hours')}} Hours</td>
+                         
                     </tr>
                     @endforeach
                   </tbody>
