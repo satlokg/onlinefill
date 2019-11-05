@@ -33,7 +33,7 @@
                <div class="col-md-12">
 
 
-                <table class="table table-responsive table-bordered">
+                <table class="table table-responsive table-bordered table-striped">
                   <thead>
                     <tr>
                       <th class="bg-green">Project/User</th>
