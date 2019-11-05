@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Task;
 use App\User;
 use App\Models\Project;
+use Excel;
 
 class ReportController extends Controller
 {
@@ -50,7 +51,7 @@ class ReportController extends Controller
     }
 
     public function todayReport(Request $r){ 
-        $users= User::all();
+        $users= User::all(); 
         $projects= Project::all();
         if($r->date){
             $date=$r->date;
@@ -58,5 +59,48 @@ class ReportController extends Controller
             $date=null;
         }
         return view('admin.report.today_report',compact('users','projects','date'));
+    }
+
+    public function downloadData($type,$date=null)
+    {
+        $data=[];
+        $users=User::all();
+        $projects= Project::all();
+        
+
+        //dd($data);
+        foreach($projects as $project){
+          
+                foreach($users as $user){
+                if($project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours')) > 0){
+                     $data[$project->project_name]['Project/User']=$project->project_name;
+                     $data[$project->project_name][$user->name]=$project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours'));
+                         
+                    }
+
+                     
+                }
+                 if($project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours')) > 0){
+                    $project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours'));
+                 }
+            
+        }
+
+       
+                   
+        //$data= User::all()->toArray(); 
+        $projects= Project::all();
+        if($date){
+            $date=$date;
+        }else{
+            $date=null;
+        }
+
+        return Excel::create('excel_data', function($excel) use ($data) {
+            $excel->sheet('mySheet', function($sheet) use ($data)
+            {
+                $sheet->fromArray($data);
+            });
+        })->download($type);
     }
 }
