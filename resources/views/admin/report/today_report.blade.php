@@ -57,7 +57,7 @@
                          <td class="bg-grey">
 
                        @endif
-                           {{$user->todaySpend($project->id,$user->id,$date)->sum('hours')}}
+                           {{$user->todaySpend($project->id,$user->id,$date)->sum('hours')}} Hours
                          </td>
                          
                       @endforeach
@@ -66,7 +66,7 @@
                        @else
                          <td class="bg-grey">
                        @endif
-                          {{$project->todaySpend($project->id,$date)->sum('hours')}}</td>
+                          {{$project->todaySpend($project->id,$date)->sum('hours')}} Hours</td>
                     </tr>
                     @endforeach
                   </tbody>
