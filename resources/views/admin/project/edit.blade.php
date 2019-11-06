@@ -69,7 +69,7 @@
                         </div>
                         <div class="form-group">
                           <label for="exampleInputPassword1">Total Estimated Hours</label>
-                          <input type="text" name="est_hours" class="form-control" id="exampleInputPassword1" placeholder="Total Estimated Hours" value="{{$project->est_hours}}">
+                          <input type="text" name="est_hours" class="form-control" id="time" placeholder="Total Estimated Hours" value="{{$project->est_hours}}">
                         </div>
                         <div class="form-group">
                           <label>Start And End Date</label>
@@ -219,7 +219,7 @@
                             &nbsp;&nbsp;&nbsp;
                             <input type="hidden" name="hours[{{$key}}][user_id]" value="{{$user->id}}">
                                   Hours
-                              <input type="text" value="{{$user->pivot->alloted_hours}}" name="hours[{{$key}}][alloted_hours]" style="width: 50px; border: 1px solid green" {{!in_array($user->id, $selected)?'disabled':''}}>
+                              <input type="text" value="{{$user->pivot->alloted_hours}}" name="hours[{{$key}}][alloted_hours]" id="time" style="width: 50px; border: 1px solid green" {{!in_array($user->id, $selected)?'disabled':''}}>
                             spend hours 
                              @if($project->spendhour($user->id) <= $project->projecthour($user->id)->alloted_hours)
                               <span class="label label-success">

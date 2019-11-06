@@ -90,16 +90,16 @@ class ProjectController extends Controller
           if(is_array($r->hours)){ 
             foreach ($r->hours as $key => $value) {
                 if(isset($value['alloted_hours'])){
-                    $sum=$sum+$value['alloted_hours'];
+                    $sum=$sum+$this->minuts($value['alloted_hours']);
                 }else{
                     $ph=ProjectHour::where('user_id',$value['user_id'])
                     ->where('project_id',$project->id)
                     ->first();
-                    $sum=$sum+$ph->alloted_hours;
+                    $sum=$sum+$this->minuts($ph->alloted_hours);
                 }
                 
             }
-            if($sum > $project->est_hours){
+            if($sum > $this->minuts($project->est_hours)){
                 $notification = array(
                         'message' => 'Your Hours is increase from total estimeted hours', 
                         'alert-type' => 'warning'

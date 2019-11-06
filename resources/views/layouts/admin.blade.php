@@ -95,6 +95,9 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="{{asset('public/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('public/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('public/plugins/input-mask/jquery.inputmask.js')}}"></script>
+<script src="{{asset('public/plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
+<script src="{{asset('public/plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
 <script>
   @if(Session::has('message'))
     var type = "{{ Session::get('alert-type', 'info') }}";
@@ -126,15 +129,16 @@
     });
   });
 </script>
- <script>
+ 
+  <script>
     $(function(){
       
       $('input[id$="time"]').inputmask(
-        "hh:mm", {
-        placeholder: "HH:MM", 
+        "##:##", {
+        placeholder: "00:00", 
         insertMode: false, 
         showMaskOnHover: false,
-        hourFormat: 12
+       
       }
       );
       

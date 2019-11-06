@@ -66,7 +66,7 @@
                         </div>
                         <div class="form-group">
                           <label for="exampleInputPassword1">Total Estimated Hours</label>
-                          <input type="text" name="est_hours" class="form-control" id="exampleInputPassword1" placeholder="Total Estimated Hours">
+                          <input type="text" name="est_hours" class="form-control" id="time" placeholder="Total Estimated Hours">
                         </div>
                         <div class="form-group">
                           <label>Start And End Date</label>

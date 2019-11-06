@@ -60,4 +60,19 @@ class Controller extends BaseController
         }
         return 0 === $result;
     }
+
+ public function minuts($time) { 
+    $minutes = 0; //declare minutes either it gives Notice: Undefined variable
+    // loop throught all the times
+    //foreach ($times as $time) {
+      if($time != null){
+        list($hour, $minute) = explode(':', $time);
+        $minutes += $hour * 60;
+        $minutes += $minute;
+      }
+    //}
+
+  
+    return $minutes;
+}
 }
