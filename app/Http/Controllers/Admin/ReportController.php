@@ -79,6 +79,7 @@ class ReportController extends Controller
                 foreach($users as $user){
                     $data[$project->project_name][$project->project_name]=$project->project_name;
                     $data[$project->project_name][$user->name]=$user->name;
+                   
                 if($project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours')) > 0){
                     
                      $data[$project->project_name][$user->name]=$project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours'));
@@ -90,11 +91,12 @@ class ReportController extends Controller
                    
                 }
                 
-            if($project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours')) > 0){
+               if($project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours')) > 0){
                        $data[$project->project_name]['Total']=$project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours'));
                      }else{
                         $data[$project->project_name]['Total']=' ';
                      }  
+
         }
 
        

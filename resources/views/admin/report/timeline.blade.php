@@ -12,7 +12,7 @@
 	</div>
 	</form>
 </div>	
-	<a href="{{route('admin.report.download',['type'=>'xlsx'])}}" class="btn btn-sm btn-info pull-right" style="margin-left: 10px;"><i class="fa fa-file-excel-o  text-success" aria-hidden="true"></i> Export Excel</a>  &nbsp;
-	<a href="{{route('admin.report.download',['type'=>'csv'])}}" class="btn btn-sm btn-info pull-right" style="margin-left: 10px;"><i class="fa fa-file-pdf-o  text-success" aria-hidden="true"></i> Export CSV</a>
+	<a href="{{route('admin.report.download',['type'=>'xlsx','date'=>$date])}}" class="btn btn-sm btn-info pull-right" style="margin-left: 10px;"><i class="fa fa-file-excel-o  text-success" aria-hidden="true"></i> Export Excel</a>  &nbsp;
+	<a href="{{route('admin.report.download',['type'=>'csv','date'=>$date])}}" class="btn btn-sm btn-info pull-right" style="margin-left: 10px;"><i class="fa fa-file-pdf-o  text-success" aria-hidden="true"></i> Export CSV</a>
 	<!-- <a href="{{route('admin.report.download',['type'=>'pdf'])}}" class="btn btn-sm btn-info pull-right" style="margin-left: 10px;"><i class="fa fa-file-pdf-o  text-success" aria-hidden="true"></i> Export PDF</a> -->
 </div>
