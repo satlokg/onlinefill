@@ -135,7 +135,7 @@
       
       $('input[id$="time"]').inputmask(
         "###:##", {
-        placeholder: "00:00", 
+        placeholder: "000:00", 
         insertMode: false, 
         showMaskOnHover: false,
        
