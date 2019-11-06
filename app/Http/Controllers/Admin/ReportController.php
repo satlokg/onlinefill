@@ -104,7 +104,7 @@ class ReportController extends Controller
         //$data= User::all()->toArray(); 
         
 
-        return Excel::create('excel_data', function($excel) use ($data) {
+        return Excel::create('work-report('. $date.')', function($excel) use ($data) {
             $excel->sheet('work-report( $date)', function($sheet) use ($data)
             {
                 $sheet->fromArray($data);
