@@ -9,7 +9,7 @@ use App\Models\Task;
 class Project extends Model
 {
     protected $fillable=[
-    	'project_name','technology','delivery_date','git_repo','project_manager','description','start_end','est_hours'
+    	'project_name','technology','delivery_date','git_repo','project_manager','description','start_end','est_hours','status'
     ];
     public function projectManager($id){
         $user=User::find($id);
@@ -80,5 +80,20 @@ class Project extends Model
 
     // returns the time already formatted
     return sprintf('%02d:%02d', $hours, $minutes);
+}
+
+public function minuts($time) {  
+    $minutes = 0; //declare minutes either it gives Notice: Undefined variable
+    // loop throught all the times
+    //foreach ($times as $time) {
+      if($time != null){
+        list($hour, $minute) = explode(':', $time);
+        $minutes += $hour * 60;
+        $minutes += $minute;
+      }
+    //}
+
+  
+    return $minutes;
 }
 }

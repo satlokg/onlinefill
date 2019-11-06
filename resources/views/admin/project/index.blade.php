@@ -55,7 +55,7 @@
                   <td>{{$value->delivery_date}}</td>
                   <td>{{$value->projectManager($value->project_manager)}}</td>
                   <td>{{$value->est_hours}}</td>
-                  <td> @if($value->totalspendhour() <= $value->est_hours)
+                  <td> @if($value->minuts($value->totalspendhour()) <= $value->minuts($value->est_hours))
                     <span class="label label-success">
                     @else
                      <span class="label label-danger">

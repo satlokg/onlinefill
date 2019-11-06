@@ -221,7 +221,7 @@
                                   Hours
                               <input type="text" value="{{$user->pivot->alloted_hours}}" name="hours[{{$key}}][alloted_hours]" id="time" style="width: 50px; border: 1px solid green" {{!in_array($user->id, $selected)?'disabled':''}}>
                             spend hours 
-                             @if($project->spendhour($user->id) <= $project->projecthour($user->id)->alloted_hours)
+                             @if($project->minuts($project->spendhour($user->id)) <= $project->minuts($project->projecthour($user->id)->alloted_hours))
                               <span class="label label-success">
                               @else
                                <span class="label label-danger">
@@ -243,6 +243,29 @@
                              </li>
                             @endforeach
                           </ul>
+                      </div>                        
+                      </div>
+                    
+
+                  </div>
+                </div>
+
+
+                <div class="box box-primary">
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Status</h3>
+                    <a href="#" class="btn btn-sm btn-info pull-right"  data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                  </div>
+                  <!-- /.box-header -->
+                  <!-- form start -->
+                  <div class="box-body">
+                    <div class="row"><br>
+                      <div class="col-md-12 mt-10">
+                          <select class="form-control" name="status">
+                            <option value="2" {{($project->status==2)?'selected':''}}>Live</option>
+                            <option value="1" {{($project->status==1)?'selected':''}}>Working</option>
+                            <option value="0" {{($project->status==0)?'selected':''}}>Hole</option>
+                          </select>
                       </div>                        
                       </div>
                     

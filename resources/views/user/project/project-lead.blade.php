@@ -69,7 +69,11 @@
                  
                   <td>{{$value->created_at}}</td>
                   <td>
+                    @if($value->status==1)
                     <a href="{{route('user.projects.leaddetail',['id'=>encrypt($value->id,'vipra')])}}" class="btn btn-sm btn-warning">View</a>
+                    @else
+
+                    @endif
                   </td>
                    </tr>
                   @endforeach

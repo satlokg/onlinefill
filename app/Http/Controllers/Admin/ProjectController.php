@@ -52,6 +52,7 @@ class ProjectController extends Controller
             $project->description =$r->description;
             $project->start_end =$r->start_end;
             $project->est_hours =$r->est_hours;
+            $project->status =$r->status;
             $project->save();
            
         }else{
@@ -64,6 +65,7 @@ class ProjectController extends Controller
             'description' =>$r->description,
             'start_end' =>$r->start_end,
             'est_hours' =>$r->est_hours,
+            'status' =>$r->status,
         ]);
          $project->users()->sync($r->assign_user);
          $project->userhours()->sync($r->assign_user);

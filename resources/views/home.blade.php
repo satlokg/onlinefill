@@ -58,7 +58,7 @@
                   <td><span class="label label-success">{{$value->pivot->alloted_hours}} hours</span></td>
                  
                     <td>
-                     @if($value->spendhour() <= $value->projecthour()->alloted_hours)
+                     @if($value->minuts($value->spendhour()) <= $value->minuts($value->projecthour()->alloted_hours))
                     <span class="label label-success">
                     @else
                      <span class="label label-danger">
@@ -69,7 +69,12 @@
                  
                   <td>{{$value->pivot->created_at}}</td>
                   <td>
+                    
+                    @if($value->status==1)
                     <a href="{{route('user.projects.detail',['id'=>encrypt($value->id,'vipra')])}}" class="btn btn-sm btn-warning">View</a>
+                    @else
+
+                    @endif
                   </td>
                    </tr>
                   @endforeach

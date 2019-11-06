@@ -40,7 +40,7 @@ class ProjectController extends Controller
 
     public function projectLeadDetail($key)
     {
-        $id=decrypt($key,'vipra');
+        $id=decrypt($key,'vipra'); 
         $project=Project::find($id); 
         return view('user.project.leaddetail',compact('project'));
     }

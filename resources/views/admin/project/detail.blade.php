@@ -58,7 +58,7 @@
                     
                   </td>
                   <td>
-                    @if($project->totalspendhour() <= $project->est_hours)
+                    @if($project->minuts($project->totalspendhour()) <= $project->minuts($project->est_hours))
                     <span class="label label-success">
                     @else
                      <span class="label label-danger">
@@ -159,7 +159,7 @@
                <ul class="list-group">
                 @foreach($project->userhours as $user)
                   <li class="list-group-item text-success" >{{$user->name}} ({{$user->designation}}) ({{$user->technology}})
-                     @if($project->spendhour($user->id) <= $project->projecthour($user->id)->alloted_hours)
+                     @if($project->minuts($project->spendhour($user->id)) <= $project->minuts($project->projecthour($user->id)->alloted_hours))
                               <span class="label label-success">
                               @else
                                <span class="label label-danger">

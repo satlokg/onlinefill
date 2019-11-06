@@ -58,7 +58,7 @@
                     
                   </td>
                   <td>
-                     @if($project->spendhour() <= $project->projecthour()->alloted_hours)
+                     @if($project->minuts($project->spendhour()) <= $project->minuts($project->projecthour()->alloted_hours))
                     <span class="label label-success">
                     @else
                      <span class="label label-danger">

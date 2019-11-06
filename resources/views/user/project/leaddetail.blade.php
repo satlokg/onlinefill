@@ -55,7 +55,7 @@
                   <td><span class="label label-success">{{$project->est_hours}} hours</span></td>
                  
                     <td>
-                     @if($project->totalspendhour() <= $project->est_hours)
+                     @if($project->minuts($project->totalspendhour()) <= $project->minuts($project->est_hours))
                     <span class="label label-success">
                     @else
                      <span class="label label-danger">
@@ -226,7 +226,7 @@
                               <input type="text" value="{{$user->pivot->alloted_hours}}" name="hours[{{$key}}][alloted_hours]" style="width: 50px; border: 1px solid green" {{!in_array($user->id, $selected)?'disabled':''}}>
                             
                             spend hours 
-                             @if($project->spendhour($user->id) <= $project->projecthour($user->id)->alloted_hours)
+                             @if($project->minuts($project->spendhour($user->id)) <= $project->minuts($project->projecthour($user->id)->alloted_hours))
                               <span class="label label-success">
                               @else
                                <span class="label label-danger">
