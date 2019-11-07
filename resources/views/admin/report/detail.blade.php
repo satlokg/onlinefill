@@ -72,7 +72,7 @@
                 {
                     title : '{{ $task[0]->AddPlayTime($task->pluck('hours')) }} Hours',
                     start : '{{ $date }}',
-                    url : '{{ route('user.report.detail',["date"=>$date]) }}'
+                    url : '{{ route('admin.user.report.detail',["date"=>$date]) }}'
                 },
                 @endforeach
             ]
