@@ -262,9 +262,9 @@
                     <div class="row"><br>
                       <div class="col-md-12 mt-10">
                           <select class="form-control" name="status">
-                            <option value="2" {{($project->status==2)?'selected':''}}>Live</option>
-                            <option value="1" {{($project->status==1)?'selected':''}}>Working</option>
-                            <option value="0" {{($project->status==0)?'selected':''}}>Hole</option>
+                            <option value="2" {{($project->status==2)?'selected':''}}>Delivered</option>
+                            <option value="1" {{($project->status==1)?'selected':''}}>On Going</option>
+                            <option value="0" {{($project->status==0)?'selected':''}}>Hold</option>
                           </select>
                       </div>                        
                       </div>
