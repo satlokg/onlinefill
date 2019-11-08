@@ -105,7 +105,7 @@
                       <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                         </button>
-                        @if($task->user->id == Auth::user()->id && $task->created_at == \Carbon\Carbon::now())
+                        @if($task->user->id == Auth::user()->id && $task->created_at->format('Y-m-d') == \Carbon\Carbon::now())
                           <a type="button" href="{{route('user.projects.detail',['id'=>encrypt($project->id,'vipra'),'cid'=>encrypt($task->id,'vipra')])}}" class="btn btn-box-tool"><i class="fa fa-pencil"></i>
                         </a>
                         @endif
