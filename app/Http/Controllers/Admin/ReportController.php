@@ -68,11 +68,13 @@ class ReportController extends Controller
     {
         $data=[];
         $users=User::all();
-        $projects= Project::all();
-        $projects= Project::all();
+       
         if($date){
+             $pid=Task::groupBy('project_id')->whereDate('created_at',$r->date)->whereNotNull('hours')->pluck('project_id');
+            $projects= Project::whereIn('id',$pid)->get();
             $date=$date;
         }else{
+            $projects= Project::all();
             $date=null;
         }
 
