@@ -57,7 +57,7 @@
                        @foreach($users as $user)
                        @if($project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours')) > 0)
                           <td class="bg-green">
-                            {{$project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours'))}} 
+                            {{$user->todaySpend($project->id,$user->id,$date)->pluck('hours')}} 
                        @else
                          <td class="bg-grey">
 
