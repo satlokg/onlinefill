@@ -54,7 +54,7 @@ class ReportController extends Controller
     public function todayReport(Request $r){ 
         $users= User::all(); 
         if($r->date){
-            $pid=Task::groupBy('project_id')->whereDate('created_at',$r->date)->pluck('project_id');
+            $pid=Task::groupBy('project_id')->whereDate('created_at',$r->date)->whereNotNull('hours')->pluck('project_id');
             $projects= Project::whereIn('id',$pid)->get();
             $date=$r->date;
         }else{
