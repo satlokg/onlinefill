@@ -37,8 +37,12 @@
                   <thead>
                     <tr>
                       <td class="bg-green">Project/User</td>
+                     
                      @foreach($users as $user)
-                         <td class="bg-purple">{{$user->name}}</td>
+                        @php
+                        $arr = explode(' ',trim($user->name));
+                        @endphp
+                         <td class="bg-purple text-center">{{$arr[0]}}</td>
                       @endforeach
                       <td class="bg-purple">Total</td>
                     </tr>
