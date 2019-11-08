@@ -120,7 +120,7 @@
                       <!-- /.box-tools -->
                     </div>
                   </div>
-                  {!! $pages->render() !!}
+                  {!! $project->tasks->render() !!}
                   @endforeach
               </div>
 
