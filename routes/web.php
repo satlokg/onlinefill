@@ -43,7 +43,7 @@ Route::post('messages', 'ChatsController@sendMessage');
 //chat
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/project-detail/{key}', 'HomeController@projectDetail')->name('user.projects.detail');
+Route::get('/project-detail/{key}/{cid?}', 'HomeController@projectDetail')->name('user.projects.detail');
 Route::post('/project-comment', 'HomeController@projectComment')->name('user.projects.comment');
 
 //user-project

@@ -37,20 +37,36 @@ class HomeController extends Controller
         $projects=Auth::user()->projecthours; //dd($projects);
         return view('home',compact('projects'));
     }
-    public function projectDetail($key)
+    public function projectDetail($key,$cid=null)
     {
         $id=decrypt($key,'vipra');
         $project=Project::find($id); 
-        return view('user.project.detail',compact('project'));
+        if($cid != null){
+            $cid=decrypt($cid,'vipra'); 
+            $taske=Task::find($cid);
+        }else{
+            $taske='';
+        }
+
+        return view('user.project.detail',compact('project','taske'));
     }
     public function projectComment(Request $r)
     {
         $this->validate($r, [
-                'filenames.*' => 'mimes:doc,pdf,docx,zip,png,jpg,xlsx,xls'
+                'filenames.*' => 'mimes:doc,pdf,docx,zip,png,jpg,xlsx,xls',
+                'task.comment'=>'required'
         ]);
         $t=$r->task;
         $t['user_id']=Auth::user()->id;
-        $task=Task::create($t);
+        if($r->task['id']){
+            $task=Task::find($r->task['id']);
+            $task->comment=$r->task['comment'];
+            $task->hours=$r->task['hours'];
+            $task->save();
+        }else{
+            $task=Task::create($t);
+        }
+        
         if($r->hasfile('filenames'))
          {
             foreach($r->file('filenames') as $file)
@@ -79,7 +95,7 @@ class HomeController extends Controller
                         'alert-type' => 'danger'
                     );
         }
-         return back()->with($notification);
+         return redirect()->route('user.projects.detail',['id'=>encrypt($r->task['project_id'],'vipra')])->with($notification);
     }
 
     public function notify(){

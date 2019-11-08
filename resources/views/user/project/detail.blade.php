@@ -90,7 +90,10 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
-                @foreach($project->tasks as $task)
+                @php
+                  $tasks = $project->tasks()->paginate(10);
+                @endphp
+                @foreach($tasks as $task)
                 @if($project->project_manager==$task->user_id)
                  <div class="box box-warning box-solid">
                 @else
@@ -102,6 +105,10 @@
                       <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                         </button>
+                        @if($task->user->id == Auth::user()->id && $task->created_at=\Carbon\Carbon::now())
+                          <a type="button" href="{{route('user.projects.detail',['id'=>encrypt($project->id,'vipra'),'cid'=>encrypt($task->id,'vipra')])}}" class="btn btn-box-tool"><i class="fa fa-pencil"></i>
+                        </a>
+                        @endif
                       </div>
                       <!-- /.box-tools -->
                     </div>
@@ -126,6 +133,7 @@
                     </div>
                   </div>
                   @endforeach
+                  {!! $tasks->render() !!}
               </div>
 
               <div class="tab-pane" id="tab_2">
@@ -184,19 +192,7 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane active bg-aqua" style="padding:5px;" id="tab_1-1">
-              
-                    <form method="POST" action="{{ route('user.projects.comment') }}" enctype="multipart/form-data">
-                      @csrf
-                      <input type="hidden" name="task[project_id]" value="{{$project->id}}">
-                      <textarea class="textarea" name="task[comment]" placeholder="Place some text here"
-                                style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; color: #000"></textarea>
-                        <div class="form-group">
-                          <label for="exampleInputEmail1">Enter Spend Hours</label>
-                          <input type="text" name="task[hours]" class="form-control" id="time" placeholder="Enter Spend Hours">
-                        </div>  
-                        <div class="form-group">
-                          <label for="exampleInputEmail1">Upload Document</label>
-                         @if (count($errors) > 0)
+              @if (count($errors) > 0)
                       <div class="alert alert-danger">
                           <strong>Sorry!</strong> There were more problems with your HTML input.<br><br>
                           <ul>
@@ -211,6 +207,18 @@
                         {{ session('success') }}
                       </div> 
                       @endif
+                    <form method="POST" action="{{ route('user.projects.comment') }}" enctype="multipart/form-data">
+                      @csrf
+                      <input type="hidden" name="task[project_id]" value="{{$project->id}}">
+                      <input type="hidden" name="task[id]" value="{{@$taske->id}}">
+                      <textarea class="textarea" name="task[comment]" required="required" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; color: #000">{{@$taske->comment}}</textarea>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Enter Spend Hours</label>
+                          <input type="text" name="task[hours]" class="form-control" id="time" placeholder="Enter Spend Hours" value="{{@$taske->hours}}">
+                        </div>  
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Upload Document</label>
+                         
                      <div class="input-group hdtuto control-group lst increment" >
                         <input type="file" name="filenames[]" class="myfrm form-control">
                         <div class="input-group-btn"> 
