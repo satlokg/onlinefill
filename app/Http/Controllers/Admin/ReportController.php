@@ -70,7 +70,7 @@ class ReportController extends Controller
         $users=User::all();
        
         if($date){
-             $pid=Task::groupBy('project_id')->whereDate('created_at',$r->date)->whereNotNull('hours')->pluck('project_id');
+             $pid=Task::groupBy('project_id')->whereDate('created_at',$date)->whereNotNull('hours')->pluck('project_id');
             $projects= Project::whereIn('id',$pid)->get();
             $date=$date;
         }else{
