@@ -8,6 +8,7 @@ use App\Models\Task;
 use App\User;
 use App\Models\Project;
 use Excel;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -52,10 +53,12 @@ class ReportController extends Controller
 
     public function todayReport(Request $r){ 
         $users= User::all(); 
-        $projects= Project::all();
         if($r->date){
+            $pid=Task::groupBy('project_id')->whereDate('created_at',$r->date)->pluck('project_id');
+            $projects= Project::whereIn('id',$pid)->get();
             $date=$r->date;
         }else{
+            $projects= Project::all();
             $date=null;
         }
         return view('admin.report.today_report',compact('users','projects','date'));
