@@ -91,7 +91,7 @@ class ReportController extends Controller
                      $data[$project->project_name][$user->name]=$project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours'));
                          
                     }else{
-                        $data[$project->project_name][$user->name]=' ';
+                        $data[$project->project_name][$arr[0]]=' ';
                     }
                     
                    
