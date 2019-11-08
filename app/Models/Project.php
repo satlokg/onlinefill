@@ -71,15 +71,17 @@ class Project extends Model
     foreach ($times as $time) {
       if($time != null){
         list($hour, $minute) = explode(':', $time);
-        if($hour > 0){
-        $minutes += $hour * 60;
-    }
-        $minutes += $minute;
-      }
-    }
-   if($minutes > 60){
-    $hours = floor($minutes / 60);
-    $minutes -= $hours * 60;
+            if($hour > 0){
+            $minutes += $hour * 60;
+            }
+            $minutes += $minute;
+          }
+          echo $minutes;
+        }
+        die('here');
+       if($minutes > 60){
+        $hours = floor($minutes / 60);
+        $minutes -= $hours * 60;
    }
     
 
