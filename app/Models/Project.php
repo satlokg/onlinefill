@@ -30,7 +30,7 @@ class Project extends Model
 
 
     public function tasks(){
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class)->orderBy('created_at','DESC');
     }
 
     public function projecthour($uid=null){
