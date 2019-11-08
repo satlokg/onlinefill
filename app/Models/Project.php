@@ -76,9 +76,9 @@ class Project extends Model
             }
             $minutes += $minute;
           }
-          sprintf('%02d:%02d', $hours, $minutes);
+          sprintf('%02d:%02d', $hours, $minutes); die('here');
         }
-        die('here');
+
        if($minutes > 60){
         $hours = floor($minutes / 60);
         $minutes -= $hours * 60;
