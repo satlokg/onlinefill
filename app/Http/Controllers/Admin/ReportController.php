@@ -84,7 +84,7 @@ class ReportController extends Controller
                 foreach($users as $user){
                     $data[$project->project_name][$project->project_name]=$project->project_name;
                     $arr = explode(' ',trim($user->name));
-                    $data[$project->project_name][$user->name]=$arr[0];
+                    $data[$project->project_name][$arr[0]]=$arr[0];
                    
                 if($project->minuts($project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours'))) > 0){
                     
