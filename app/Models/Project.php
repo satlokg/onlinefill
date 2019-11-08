@@ -66,7 +66,7 @@ class Project extends Model
     }
     public function AddPlayTime($times) { 
     $minutes = 00;
-    $hours = 00 //declare minutes either it gives Notice: Undefined variable
+    $hours = 00; //declare minutes either it gives Notice: Undefined variable
     // loop throught all the times
     foreach ($times as $time) {
       if($time != null){
