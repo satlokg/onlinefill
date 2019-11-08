@@ -36,11 +36,11 @@
                 <table class="table table-responsive table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th class="bg-green">Project/User</th>
+                      <td class="bg-green">Project/User</td>
                      @foreach($users as $user)
-                         <th class="bg-purple">{{$user->name}}</th>
+                         <td class="bg-purple">{{$user->name}}</td>
                       @endforeach
-                      <th class="bg-purple">Total</th>
+                      <td class="bg-purple">Total</td>
                     </tr>
                   </thead>
                   <tbody>
@@ -49,11 +49,11 @@
                     <tr>
                       
                       
-                      <th class="bg-yellow">{{$project->project_name}}</th>
+                      <td class="bg-yellow">{{$project->project_name}}</td>
                        @foreach($users as $user)
                        @if($project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours')) > 0)
                           <td class="bg-green">
-                            {{$project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours'))}} Hours
+                            {{$project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours'))}} 
                        @else
                          <td class="bg-grey">
 
@@ -64,7 +64,7 @@
                       @endforeach
                       @if($project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours')) > 0)
                           <td class="bg-orange">
-                             {{$project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours'))}} Hours</td>
+                             {{$project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours'))}} </td>
                        @else
                          <td class="bg-grey">
                        @endif
