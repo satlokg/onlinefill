@@ -90,7 +90,7 @@
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
                 @php
-                  $tasks = $project->tasks()->paginate(2);
+                  $tasks = $project->tasks()->paginate(10);
                 @endphp
                 @foreach($tasks as $task)
                  <div class="box box-info box-solid">
