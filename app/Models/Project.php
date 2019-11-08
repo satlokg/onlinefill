@@ -76,7 +76,7 @@ class Project extends Model
             }
             $minutes += $minute;
           }
-          echo $minutes;
+          sprintf('%02d:%02d', $hours, $minutes);
         }
         die('here');
        if($minutes > 60){
