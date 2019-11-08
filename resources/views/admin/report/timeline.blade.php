@@ -3,10 +3,10 @@
 <div class="col-sm-3 pull-right">
 	<form action="" method="get" class="form-horizontal">
 	<div class="input-group input-group-sm">
-		
-		<input autocomplete="off" type="text" class="form-control pull-right" id="datepicker" name="date" value="{{$date}}">
-		<span class="input-group-btn">
 		<button class="btn btn-info btn-flat"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+		<input autocomplete="off" type="text" class="form-control pull-right" id="datepicker" name="date" value="{{$date}}" placeholder="Please Select Date">
+		<span class="input-group-btn">
+		
 		</span>
 	    <span class="input-group-btn">
 	      <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search" aria-hidden="true"></i></button>
