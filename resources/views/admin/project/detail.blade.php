@@ -89,7 +89,10 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_1">
-                @foreach($project->tasks()->paginate(2) as $task)
+                @php
+                  $tasks = $project->tasks()->paginate(2);
+                @endphp
+                @foreach($tasks as $task)
                  <div class="box box-info box-solid">
                     <div class="box-header with-border">
                       <h3 class="box-title">{{$task->user->name}}</h3>
@@ -120,8 +123,9 @@
                       <!-- /.box-tools -->
                     </div>
                   </div>
-                  {!! $project->tasks->render() !!}
+                  
                   @endforeach
+                  {!! $tasks->render() !!}
               </div>
 
               <div class="tab-pane" id="tab_2">
