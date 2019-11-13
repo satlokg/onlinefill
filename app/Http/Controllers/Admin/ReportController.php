@@ -104,7 +104,18 @@ class ReportController extends Controller
                      }  
 
         }
-
+       $data['total']['Total']='Total';
+       foreach($users as $user){
+                if($user->minuts($user->AddPlayTime($user->allTodaySpend($user->id,$date)->pluck('hours'))) > 0){
+                    
+                     $data['total'][$user->name]=$user->AddPlayTime($user->allTodaySpend($user->id,$date)->pluck('hours'));
+                         
+                    }else{
+                        $data['total'][$user->name]=' ';
+                    }
+                   
+                }
+                $data['total']['total']=' ';
        
                    
         //$data= User::all()->toArray(); 

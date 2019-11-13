@@ -61,8 +61,49 @@ class User extends Authenticatable
         $task->get();
         return $task;
     }
+
+    public function allTodaySpend($uid,$date){ 
+         $task = Task::where('user_id',$uid);
+        if($date!=null){
+            $task->whereDate('created_at',$date);
+        }
+        $t = $task->get();
+        return $t;
+    }
     public function messages()
         {
           return $this->hasMany(Message::class);
         }
+
+    public function AddPlayTime($times) { 
+    $minutes = 0; //declare minutes either it gives Notice: Undefined variable
+    // loop throught all the times
+    foreach ($times as $time) {
+      if($time != null){
+        list($hour, $minute) = explode(':', $time);
+        $minutes += $hour * 60;
+        $minutes += $minute;
+      }
+    }
+
+    $hours = floor($minutes / 60);
+    $minutes -= $hours * 60;
+
+    // returns the time already formatted
+    return sprintf('%02d:%02d', $hours, $minutes);
+}
+public function minuts($time) {  
+    $minutes = 0; //declare minutes either it gives Notice: Undefined variable
+    // loop throught all the times
+    //foreach ($times as $time) {
+      if($time != null){
+        list($hour, $minute) = explode(':', $time);
+        $minutes += $hour * 60;
+        $minutes += $minute;
+      }
+    //}
+
+  
+    return $minutes;
+}
 }
