@@ -70,7 +70,7 @@
                           <td class="bg-orange">
                              {{$project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours'))}} </td>
                        @else
-                         <td class="bg-grey">
+                         <td class="bg-grey"></td>
                        @endif
                          
                     </tr>
@@ -79,8 +79,11 @@
                       <td class="bg-primary">Total Hours</td>
                      
                      @foreach($users as $user)
-                        
+                        @if($user->minuts($user->AddPlayTime($user->allTodaySpend($user->id,$date)->pluck('hours'))) > 0)
                          <td class="bg-primary text-center">{{$user->AddPlayTime($user->allTodaySpend($user->id,$date)->pluck('hours'))}}</td>
+                         @else
+                         <td class="bg-primary"></td>
+                       @endif
                       @endforeach
                       <td class="bg-primary"></td>
                     </tr>
