@@ -76,13 +76,13 @@
                     </tr>
                     @endforeach
                     <tr>
-                      <td class="bg-info">Total Hours</td>
+                      <td class="bg-primary">Total Hours</td>
                      
                      @foreach($users as $user)
                         
-                         <td class="bg-info text-center">{{$user->AddPlayTime($user->allTodaySpend($user->id,$date)->pluck('hours'))}}</td>
+                         <td class="bg-primary text-center">{{$user->AddPlayTime($user->allTodaySpend($user->id,$date)->pluck('hours'))}}</td>
                       @endforeach
-                      <td class="bg-info"></td>
+                      <td class="bg-primary"></td>
                     </tr>
                   </tbody>
                 </table>
