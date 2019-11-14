@@ -22,14 +22,7 @@
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">{{$project->project_name}}</h3>
-              <div class="pull-right">
-                @if($at && $at->status==1)
-                <a href="{{route('user.project.stop',['key'=>encrypt($project->id,'vipra'),'ids'=>$at->id])}}" class="btn btn-sm btn-danger pull-right">Stop Project</a>
-                @else
-                <a href="{{route('user.project.start',['key'=>encrypt($project->id,'vipra')])}}" class="btn btn-sm btn-info pull-right">Start Project</a>
-                @endif
-                
-              </div>
+             
             </div>
             <!-- /.box-header -->
             <div class="box-body">
