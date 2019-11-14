@@ -37,7 +37,7 @@ Route::get('markasunread', function () {
 Auth::routes();
 
 //chat
-Route::get('/', 'ChatsController@index');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('messages', 'ChatsController@fetchMessages');
 Route::post('messages', 'ChatsController@sendMessage');
 //chat
@@ -50,8 +50,8 @@ Route::post('/project-comment', 'HomeController@projectComment')->name('user.pro
 Route::get('/project-lead', 'user\ProjectController@projectLead')->name('user.project.lead');
 Route::get('/project-lead-detail/{key}', 'user\ProjectController@projectLeadDetail')->name('user.projects.leaddetail');
 Route::post('/project-lead-hours', 'user\ProjectController@addHours')->name('user.projects.addHours');
-Route::get('/project-start/{key}', 'user\ProjectController@start')->name('user.project.start');
-Route::get('/project-stop/{key}/{ids}', 'user\ProjectController@stop')->name('user.project.stop');
+Route::get('/project-start', 'user\ProjectController@start')->name('user.project.start');
+Route::get('/project-stop/{ids}', 'user\ProjectController@stop')->name('user.project.stop');
 
 
 
@@ -91,6 +91,10 @@ Route::prefix('admin')->group(function() {
     Route::get('/report/detail/{date}/{key}', 'Admin\ReportController@detail')->name('admin.user.report.detail');
     Route::get('/report/todayReport', 'Admin\ReportController@todayReport')->name('admin.report.todayReport');
     Route::get('/report/downloadData/{type}/{date?}', 'Admin\ReportController@downloadData')->name('admin.report.download');
+
+    //attempt
+    Route::get('/report/attempt', 'Admin\ReportController@attempt')->name('admin.report.attempt');
+
 });
 
 Route::prefix('vendor')->group(function() {

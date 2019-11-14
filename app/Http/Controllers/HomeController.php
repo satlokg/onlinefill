@@ -36,7 +36,8 @@ class HomeController extends Controller
     public function index()
     {
         $projects=Auth::user()->projecthours; //dd($projects);
-        return view('home',compact('projects'));
+        $at=Attempt::where('user_id',Auth::user()->id)->orderBy('id','DESC')->first();
+        return view('home',compact('projects','at'));
     }
     public function projectDetail($key,$cid=null)
     {
@@ -48,8 +49,8 @@ class HomeController extends Controller
         }else{
             $taske='';
         }
-        $at=Attempt::where('user_id',Auth::user()->id)->where('project_id',$id)->orderBy('id','DESC')->first();
-        return view('user.project.detail',compact('project','taske','at'));
+        
+        return view('user.project.detail',compact('project','taske'));
     }
     public function projectComment(Request $r)
     {

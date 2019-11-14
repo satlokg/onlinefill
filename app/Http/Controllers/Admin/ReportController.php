@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Task;
 use App\User;
 use App\Models\Project;
+use App\Models\Attempt;
 use Excel;
 use Carbon\Carbon;
 
@@ -127,5 +128,18 @@ class ReportController extends Controller
                 $sheet->fromArray($data);
             });
         })->download($type);
+    }
+
+    public function attempt(Request $r){ 
+        $users= User::all(); 
+        if($r->date){
+            $pid=Attempt::groupBy('project_id')->whereDate('created_at',$r->date)->pluck('project_id');
+            $projects= Project::whereIn('id',$pid)->get();
+            $date=$r->date;
+        }else{
+            $projects= Project::whereDate('created_at',Carbon::today())->get();
+            $date=null;
+        }
+        return view('admin.report.attempt',compact('users','projects','date'));
     }
 }
