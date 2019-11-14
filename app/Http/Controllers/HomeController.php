@@ -12,6 +12,7 @@ use App\Models\Project;
 use App\Models\Task;
 use App\Models\Taskdac;
 use App\Models\File;
+use App\Models\Attempt;
 use Auth;
 
 
@@ -47,8 +48,8 @@ class HomeController extends Controller
         }else{
             $taske='';
         }
-
-        return view('user.project.detail',compact('project','taske'));
+        $at=Attempt::where('user_id',Auth::user()->id)->where('project_id',$id)->orderBy('id','DESC')->first();
+        return view('user.project.detail',compact('project','taske','at'));
     }
     public function projectComment(Request $r)
     {

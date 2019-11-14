@@ -33,6 +33,11 @@ class Project extends Model
         return $this->hasMany(Task::class)->orderBy('created_at','DESC');
     }
 
+public function attempts(){
+        return $this->hasMany(Attempt::class)->orderBy('id','DESC');
+    }
+
+
     public function projecthour($uid=null){
         if($uid==null){
             $uid=Auth::user()->id;

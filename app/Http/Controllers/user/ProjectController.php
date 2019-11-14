@@ -13,7 +13,9 @@ use App\Models\Project;
 use App\Models\Task;
 use App\Models\Taskdac;
 use App\Models\File;
+use App\Models\Attempt;
 use Auth;
+use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
@@ -80,4 +82,44 @@ class ProjectController extends Controller
                     );
          return back()->with($notification);
     }
+
+    public function start($key)
+    {
+        $id=decrypt($key,'vipra'); 
+        $at=$attempt= Attempt::where('user_id',Auth::user()->id)->where('status',1)->whereDate('created_at',Carbon::today())->first();
+        if($at){
+            $notification = array(
+                        'message' => 'Already started Project'.$at->project->project_name, 
+                        'alert-type' => 'error'
+                    ); 
+         return back()->with($notification);
+        }
+        $attempt=new Attempt(); 
+        $attempt->user_id=Auth::user()->id;
+        $attempt->project_id=$id;
+        $attempt->status=1;
+        $attempt->save();
+
+        $notification = array(
+                        'message' => 'Project Started', 
+                        'alert-type' => 'success'
+                    );
+         return back()->with($notification);
+    }
+
+    public function stop($key,$ids)
+    {
+        $id=decrypt($key,'vipra'); 
+        $attempt= Attempt::find($ids); 
+        $attempt->user_id=Auth::user()->id;
+        $attempt->project_id=$id;
+        $attempt->status=0;
+        $attempt->save();
+        $notification = array(
+                        'message' => 'Project Stop', 
+                        'alert-type' => 'error'
+                    );
+         return back()->with($notification);
+    }
+
 }
