@@ -36,7 +36,7 @@ class HomeController extends Controller
     public function index()
     {
         $projects=Auth::user()->projecthours; //dd($projects);
-        $at=Attempt::where('user_id',Auth::user()->id)->orderBy('id','DESC')->first();
+        $at=$attempt= Attempt::where('user_id',Auth::user()->id)->where('status',1)->whereDate('created_at',Carbon::today())->first();
         return view('home',compact('projects','at'));
     }
     public function projectDetail($key,$cid=null)
