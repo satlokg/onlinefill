@@ -22,7 +22,9 @@
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">Project Detail</h3>
-              
+               <div class="pull-right">
+              <a href="{{route('user.projects.detail',['id'=>encrypt($at->project_id,'vipra')])}}" class="btn btn-sm btn-success">Started Project {{$at->project->project_name}}</a>
+            </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
