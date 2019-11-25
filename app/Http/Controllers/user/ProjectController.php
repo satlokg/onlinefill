@@ -83,20 +83,20 @@ class ProjectController extends Controller
          return back()->with($notification);
     }
 
-    public function start()
+    public function start($key)
     {
-        // $id=decrypt($key,'vipra'); 
-        // $at=$attempt= Attempt::where('user_id',Auth::user()->id)->where('status',1)->whereDate('created_at',Carbon::today())->first();
-        // if($at){
-        //     $notification = array(
-        //                 'message' => 'Already started Project'.$at->project->project_name, 
-        //                 'alert-type' => 'error'
-        //             ); 
-        //  return back()->with($notification);
-        // }
+        $id=decrypt($key,'vipra'); 
+        $at=$attempt= Attempt::where('user_id',Auth::user()->id)->where('status',1)->whereDate('created_at',Carbon::today())->first();
+        if($at){
+            $notification = array(
+                        'message' => 'Already started Project'.$at->project->project_name, 
+                        'alert-type' => 'error'
+                    ); 
+         return back()->with($notification);
+        }
         $attempt=new Attempt(); 
         $attempt->user_id=Auth::user()->id;
-        //$attempt->project_id=$id;
+        $attempt->project_id=$id;
         $attempt->status=1;
         $attempt->save();
 
@@ -107,12 +107,12 @@ class ProjectController extends Controller
          return back()->with($notification);
     }
 
-    public function stop($ids)
+    public function stop($key)
     {
-       // $id=decrypt($key,'vipra'); 
-        $attempt= Attempt::find($ids); 
+         $id=decrypt($key,'vipra'); 
+        $attempt= Attempt::find($id); 
         $attempt->user_id=Auth::user()->id;
-        //$attempt->project_id=$id;
+        $attempt->project_id=$attempt->project_id;
         $attempt->status=0;
         $attempt->save();
         $notification = array(

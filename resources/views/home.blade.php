@@ -22,14 +22,7 @@
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">Project Detail</h3>
-              <div class="pull-right">
-                @if($at && $at->status==1)
-                <a href="{{route('user.project.stop',['ids'=>$at->id])}}" class="btn btn-sm btn-danger pull-right">Stop Day</a>
-                @else
-                <a href="{{route('user.project.start')}}" class="btn btn-sm btn-info pull-right">Start Day</a>
-                @endif
-                
-              </div>
+              
             </div>
             <!-- /.box-header -->
             <div class="box-body">

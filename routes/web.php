@@ -50,8 +50,8 @@ Route::post('/project-comment', 'HomeController@projectComment')->name('user.pro
 Route::get('/project-lead', 'user\ProjectController@projectLead')->name('user.project.lead');
 Route::get('/project-lead-detail/{key}', 'user\ProjectController@projectLeadDetail')->name('user.projects.leaddetail');
 Route::post('/project-lead-hours', 'user\ProjectController@addHours')->name('user.projects.addHours');
-Route::get('/project-start', 'user\ProjectController@start')->name('user.project.start');
-Route::get('/project-stop/{ids}', 'user\ProjectController@stop')->name('user.project.stop');
+Route::get('/project-start/{key}', 'user\ProjectController@start')->name('user.project.start');
+Route::get('/project-stop/{key}', 'user\ProjectController@stop')->name('user.project.stop');
 
 
 

@@ -41,6 +41,7 @@ class HomeController extends Controller
     }
     public function projectDetail($key,$cid=null)
     {
+      $at=Attempt::where('user_id',Auth::user()->id)->orderBy('id','DESC')->first();
         $id=decrypt($key,'vipra');
         $project=Project::find($id); 
         if($cid != null){
@@ -50,7 +51,7 @@ class HomeController extends Controller
             $taske='';
         }
         
-        return view('user.project.detail',compact('project','taske'));
+        return view('user.project.detail',compact('project','taske','at'));
     }
     public function projectComment(Request $r)
     {
