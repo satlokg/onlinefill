@@ -137,9 +137,11 @@ class ReportController extends Controller
             $projects= Project::whereIn('id',$pid)->get();
             $date=$r->date;
         }else{
-            $projects= Project::whereDate('created_at',Carbon::today())->get();
+            $pid=Attempt::groupBy('project_id')->whereDate('created_at',Carbon::today())->pluck('project_id');
+            $projects= Project::whereIn('id',$pid)->get();
             $date=null;
         }
+        
         return view('admin.report.attempt',compact('users','projects','date'));
     }
 }
