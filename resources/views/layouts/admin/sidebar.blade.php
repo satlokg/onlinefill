@@ -40,7 +40,11 @@
             <i class="fa fa-eye"></i> <span>Reports</span>
           </a>
         </li>
-       
+       <li>
+          <a href="{{route('admin.report.attempt')}}">
+            <i class="fa fa-eye"></i> <span>Attempt</span>
+          </a>
+        </li>
 
        
        
