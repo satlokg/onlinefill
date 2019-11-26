@@ -85,7 +85,7 @@
                             @else
                             <td>
                                @if($project->todayRunning($project->id,$user->id,$date)==1)
-                                <i class="fa fa-cog fa-spin fa-fw text-blue"></i>
+                                <i class="fa fa-cog fa-spin fa-fw text-white"></i>
                                @endif 
                            </td>
                             @endif
