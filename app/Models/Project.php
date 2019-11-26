@@ -153,4 +153,20 @@ public function totalTodayAttempt($pid,$date=null){
     }
     return $diff->format("%H:%I:%S");
 }
+
+public function todayRunning($pid,$uid,$date=null){
+   
+    if($date){
+            $ats=Attempt::select('status')->where('project_id',$pid)->where('user_id',$uid)->where('status',1)->whereDate('created_at',$date)->first();
+            
+        }else{
+            $ats= Attempt::select('status')->where('project_id',$pid)->where('user_id',$uid)->where('status',1)->whereDate('created_at',Carbon::today())->first();
+            
+        }
+    if($ats){
+        return $ats->status;
+    }else{
+        return 0;
+    }
+}
 }

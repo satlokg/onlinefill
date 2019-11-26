@@ -80,7 +80,11 @@
                             {{$project->todayAttempt($project->id,$user->id,$date)}} 
                             </td>
                             @else
-                            <td></td>
+                            <td>
+                               @if($project->todayRunning($project->id,$user->id,$date)==1)
+                                <span class="label label-info">Working</span>
+                               @endif
+                           </td>
                             @endif
                          </td>
                          
