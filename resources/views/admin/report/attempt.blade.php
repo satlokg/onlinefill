@@ -74,16 +74,18 @@
                       <td class="bg-yellow">{{$project->project_name}}</td>
                        @foreach($users as $user)
                       
-                          
-                            @if($project->todayAttempt($project->id,$user->id,$date)!='00:00:00')
+                          @if($project->todayRunning($project->id,$user->id,$date)==1)
+                          <td>
+                                <span class="label label-info">Working</span>
+                                </td>
+                          @elseif($project->todayAttempt($project->id,$user->id,$date)!='00:00:00')
                             <td class="bg-green">
                             {{$project->todayAttempt($project->id,$user->id,$date)}} 
                             </td>
+
                             @else
                             <td>
-                               @if($project->todayRunning($project->id,$user->id,$date)==1)
-                                <span class="label label-info">Working</span>
-                               @endif
+                               
                            </td>
                             @endif
                          </td>
