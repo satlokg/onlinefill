@@ -79,13 +79,13 @@
                             <td class="bg-green">
                             {{$project->todayAttempt($project->id,$user->id,$date)}}
                              @if($project->todayRunning($project->id,$user->id,$date)==1)
-                                <small class="text-danger">W</small>
+                                <small class="text-orange">W</small>
                                @endif 
                             </td>
                             @else
                             <td>
                                @if($project->todayRunning($project->id,$user->id,$date)==1)
-                                <small class="text-danger">W</small>
+                                <small class="text-orange">W</small>
                                @endif 
                            </td>
                             @endif
