@@ -46,6 +46,12 @@
           </a>
         </li>
 
+        <li>
+          <a href="{{route('admin.crm')}}">
+            <i class="fa fa-eye"></i> <span>CRM</span>
+          </a>
+        </li>
+
        
        
         

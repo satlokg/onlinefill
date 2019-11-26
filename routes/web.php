@@ -95,6 +95,10 @@ Route::prefix('admin')->group(function() {
     //attempt
     Route::get('/report/attempt', 'Admin\ReportController@attempt')->name('admin.report.attempt');
 
+
+    //CRM
+    Route::get('/crm', 'Admin\CrmController@index')->name('admin.crm');
+
 });
 
 Route::prefix('vendor')->group(function() {
