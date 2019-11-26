@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use Auth;
 use App\Models\Task;
+use Carbon\Carbon;
+use DateTime;
+
 class Project extends Model
 {
     protected $fillable=[
@@ -100,5 +103,54 @@ public function minuts($time) {
 
   
     return $minutes;
+}
+
+
+public function todayAttempt($pid,$uid,$date=null){
+    $a = new DateTime('00:00:00');
+    $b = new DateTime('00:00:00');
+    $diff = $a->diff($b);
+    $e = new DateTime('00:00:00');
+    if($date){
+            $ats=Attempt::where('project_id',$pid)->where('user_id',$uid)->whereDate('created_at',$date)->get(['updated_at','created_at']);
+            
+        }else{
+            $ats= Attempt::where('project_id',$pid)->where('user_id',$uid)->whereDate('created_at',Carbon::today())->get(['updated_at','created_at']);
+            
+        }
+    foreach($ats as $at){
+        $startTime = Carbon::parse($at->updated_at);
+        $diff1 = $at->created_at->diff($startTime);
+        $f = clone $e;
+        $e->add($diff);
+        $e->add($diff1);
+        $diff= $f->diff($e);
+
+    }
+    return $diff->format("%H:%I:%S");
+}
+
+public function totalTodayAttempt($pid,$date=null){
+    $a = new DateTime('00:00:00');
+    $b = new DateTime('00:00:00');
+    $diff = $a->diff($b);
+    $e = new DateTime('00:00:00');
+    if($date){
+            $ats=Attempt::where('project_id',$pid)->whereDate('created_at',$date)->get(['updated_at','created_at']);
+            
+        }else{
+            $ats= Attempt::where('project_id',$pid)->whereDate('created_at',Carbon::today())->get(['updated_at','created_at']);
+            
+        }
+    foreach($ats as $at){
+        $startTime = Carbon::parse($at->updated_at);
+        $diff1 = $at->created_at->diff($startTime);
+        $f = clone $e;
+        $e->add($diff);
+        $e->add($diff1);
+        $diff= $f->diff($e);
+
+    }
+    return $diff->format("%H:%I:%S");
 }
 }

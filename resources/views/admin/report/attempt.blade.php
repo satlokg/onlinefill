@@ -55,35 +55,38 @@
                       
                       <td class="bg-yellow">{{$project->project_name}}</td>
                        @foreach($users as $user)
-                       @if($project->minuts($project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours'))) > 0)
-                          <td class="bg-green">
-                            {{$project->AddPlayTime($user->todaySpend($project->id,$user->id,$date)->pluck('hours'))}} 
-                       @else
-                         <td class="bg-grey">
-
-                       @endif
-                           
+                      
+                          
+                            @if($project->todayAttempt($project->id,$user->id,$date)!='00:00:00')
+                            <td class="bg-green">
+                            {{$project->todayAttempt($project->id,$user->id,$date)}} 
+                            </td>
+                            @else
+                            <td></td>
+                            @endif
                          </td>
                          
                       @endforeach
-                      @if($project->minuts($project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours'))) > 0)
+                     
                           <td class="bg-orange">
-                             {{$project->AddPlayTime($project->todaySpend($project->id,$date)->pluck('hours'))}} </td>
-                       @else
-                         <td class="bg-grey"></td>
-                       @endif
-                         
+                              
+                            @if($project->totalTodayAttempt($project->id,$date)!='00:00:00')
+                            {{$project->totalTodayAttempt($project->id,$date)}}
+                            @endif
+                         </td>
                     </tr>
                     @endforeach
                     <tr>
                       <td class="bg-primary">Total Hours</td>
                      
                      @foreach($users as $user)
-                        @if($user->minuts($user->AddPlayTime($user->allTodaySpend($user->id,$date)->pluck('hours'))) > 0)
-                         <td class="bg-primary text-center">{{$user->AddPlayTime($user->allTodaySpend($user->id,$date)->pluck('hours'))}}</td>
-                         @else
-                         <td class="bg-primary"></td>
-                       @endif
+                       
+                         <td class="bg-primary text-center">
+                          @if($user->totalTodayAttempt($user->id,$date)!='00:00:00')
+                            {{$user->totalTodayAttempt($user->id,$date)}}
+                            @endif
+                        </td>
+                        
                       @endforeach
                       <td class="bg-primary"></td>
                     </tr>
