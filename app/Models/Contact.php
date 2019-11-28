@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
-    //
+    protected $fillable=[
+    	'potential_id','name','email','phone','chat_type','chat_id','location','role'
+    ];
 }

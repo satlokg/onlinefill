@@ -40,7 +40,7 @@
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">Add Potential</h3>
-              @include('admin.employee.timeline')
+              @include('admin.crm.timeline')
               
             </div>
             <!-- /.box-header -->
