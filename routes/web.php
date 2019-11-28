@@ -96,8 +96,10 @@ Route::prefix('admin')->group(function() {
     Route::get('/report/attempt', 'Admin\ReportController@attempt')->name('admin.report.attempt');
 
 
-    //CRM
+    //CRM admin.crm.potential.addPost
     Route::get('/crm', 'Admin\CrmController@index')->name('admin.crm');
+    Route::get('/crm/potential/add', 'Admin\CrmController@addPotential')->name('admin.crm.potential.add');
+    Route::post('/crm/potential/addPost', 'Admin\CrmController@addPostPotential')->name('admin.crm.potential.addPost');
 
 });
 

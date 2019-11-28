@@ -20,4 +20,13 @@ class CrmController extends Controller
     {
        return view('admin.crm.index');
     }
+    public function addPotential()
+    {
+       return view('admin.crm.potential.add');
+    }
+
+     public function addPostPotential(Request $r)
+    {
+       dd($r->all());
+    }
 }
