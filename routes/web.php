@@ -35,7 +35,10 @@ Route::get('markasunread', function () {
 
 
 Auth::routes();
-
+Route::post('/login', [
+    'uses'          => 'Auth\LoginController@login',
+    'middleware'    => 'checkstatus',
+]);
 //chat
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('messages', 'ChatsController@fetchMessages');
