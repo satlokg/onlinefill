@@ -131,6 +131,10 @@ class ProjectController extends Controller
  public function deleteUser($id,$pid)
     {
         $project = Project::find($pid);
+        $ph=ProjectHour::where('user_id',$id)->where('project_id',$pid)->whereNull('alloted_hours')->first();
+        if($ph){
+            $ph->delete();
+        }
         $project->users()->detach([$id]);
          $notification = array(
                         'message' => 'user removed', 

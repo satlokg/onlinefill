@@ -74,6 +74,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/employee/add', 'Admin\EmployeeController@add')->name('admin.employee.add');
     Route::post('/employee/register', 'Admin\EmployeeController@register')->name('admin.employee.register');
     Route::get('/employee/edit/{id}', 'Admin\EmployeeController@edit')->name('admin.employee.edit');
+    Route::get('/employee/delete/{id}', 'Admin\EmployeeController@delete')->name('admin.employee.delete');
     //project
     Route::get('/projects/list', 'Admin\ProjectController@index')->name('admin.projects');
     Route::get('/projects/add', 'Admin\ProjectController@add')->name('admin.projects.add');
