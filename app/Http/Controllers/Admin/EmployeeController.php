@@ -20,7 +20,7 @@ class EmployeeController extends Controller
      */
   public function index()
     {
-        $users = User::orderBy('name','asc')->where('status',1)->get();
+        $users = User::orderBy('name','asc')->get();
         return view('admin.employee.index',compact('users'));
     }
 
@@ -36,16 +36,21 @@ class EmployeeController extends Controller
 public function delete($id)
     {
         $user = User::find(decrypt($id,'vipra'));
-        $user->status = 0;
+        if($user->status==1){
+            $user->status = 0;
+        }else{
+            $user->status = 1;
+        }
+        
         $user->save();
-        if($user){
+        if($user->status == 1){
             $notification = array(
-                        'message' => $user->name.' Deleted', 
+                        'message' => $user->name.' Unblocked', 
                         'alert-type' => 'success'
                     );
         }else{
             $notification = array(
-                        'message' =>  $user->name.' not Aded', 
+                        'message' =>  $user->name.' Blocked', 
                         'alert-type' => 'danger'
                     );
         }

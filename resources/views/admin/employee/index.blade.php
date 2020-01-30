@@ -64,13 +64,18 @@
                     <a href="{{route('admin.employee.delete',['id'=>encrypt($value->id,'vipra')])}}" class="text-danger pull-right btn btn-sm btn-danger"
                            data-tr="tr_{{$value->id}}"
                            data-toggle="confirmation"
-                           data-btn-ok-label="Delete" data-btn-ok-icon="fa fa-remove"
+                           data-btn-ok-label="{{($value->id==1)?'Unblock':'Block'}}" data-btn-ok-icon="fa fa-remove"
                            data-btn-ok-class="btn btn-sm btn-danger"
                            data-btn-cancel-label="Cancel"
                            data-btn-cancel-icon="fa fa-chevron-circle-left"
                            data-btn-cancel-class="btn btn-sm btn-default"
-                           data-title="Are you sure you want to delete ?"
-                           data-placement="left" data-singleton="true">Delete
+                           data-title="Are you sure you want to ?"
+                           data-placement="left" data-singleton="true">
+                           @if($value->status == 1)
+                           Block
+                           @else
+                            Unblock
+                           @endif
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                         </a>
                   </td>
